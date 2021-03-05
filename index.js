@@ -22,20 +22,20 @@ const start = (aruga = new Client()) => {
 	const groups = await aruga.getAllGroups()
 	// kondisi ketika batas group bot telah tercapai,ubah di file settings/setting.json
 	if (groups.length > groupLimit) {
-	await aruga.sendText(chat.id, `Sorry, the group on this Bot is full\nMax Group is: ${groupLimit}`).then(() => {
+	await aruga.sendText(chat.id, `*IND*\nMaaf, bot ini sudah mencapai batas maksimal jumlah grup\n*Maks jumlah grup adalah ${groupLimit}`).\n\n*ENG*\nSorry, the group on this Bot is full\n*Max Group is: ${groupLimit}`).then(() => {
 	      aruga.leaveGroup(chat.id)
 	      aruga.deleteChat(chat.id)
 	  }) 
 	} else {
 	// kondisi ketika batas member group belum tercapai, ubah di file settings/setting.json
 	    if (chat.groupMetadata.participants.length < memberLimit) {
-	    await aruga.sendText(chat.id, `Sorry, Bot comes out if the group members do not exceed ${memberLimit} people`).then(() => {
+	    await aruga.sendText(chat.id, `*IND*\nMaaf, bot keluar jika anggota grup tidak melebihi ${memberLimit} orang\n\n*ENG*\nSorry, Bot comes out if the group members do not exceed ${memberLimit} people`).then(() => {
 	      aruga.leaveGroup(chat.id)
 	      aruga.deleteChat(chat.id)
 	    })
 	    } else {
         await aruga.simulateTyping(chat.id, true).then(async () => {
-          await aruga.sendText(chat.id, `Hai minna~, Im Aruga Bot. To find out the commands on this bot type ${prefix}menu`)
+          await aruga.sendText(chat.id, `Halo broh!\nUntuk menggunakan bot silahkan ketik *${prefix}menu*`)
         })
 	    }
 	}
@@ -51,18 +51,18 @@ const start = (aruga = new Client()) => {
         // kondisi ketika seseorang diinvite/join group lewat link
         if (event.action === 'add' && event.who !== host && isWelcome) {
 			await aruga.sendFileFromUrl(event.chat, profile, 'profile.jpg', '')
-            await aruga.sendTextWithMentions(event.chat, `Hello, Welcome to the group @${event.who.replace('@c.us', '')} \n\nHave fun with us✨`)
+            await aruga.sendTextWithMentions(event.chat, `Selamat datang @${event.who.replace('@c.us', '')} \n\nHave fun with us✨`)
         }
         // kondisi ketika seseorang dikick/keluar dari group
         if (event.action === 'remove' && event.who !== host) {
 			await aruga.sendFileFromUrl(event.chat, profile, 'profile.jpg', '')
-            await aruga.sendTextWithMentions(event.chat, `Good bye @${event.who.replace('@c.us', '')}, We'll miss you✨`)
+            await aruga.sendTextWithMentions(event.chat, `📖 *SURAT YASIN* 📖\n\n@${event.who.replace('@c.us', '')}\n\n*Innalillahi wa inna illahi raajiun*\n*Selamat jalan kawan*\n*Turut Berduka Cita*\n*Semoga diterima disisi-Nya*\n*Aamiin, Aamiin Yaa Rabbal Alaamiin*\n*Btw, Nasi Kotaknya Mana? Gw Laper Anjg*`)
         }
     })
 
     aruga.onIncomingCall(async (callData) => {
         // ketika seseorang menelpon nomor bot akan mengirim pesan
-        await aruga.sendText(callData.peerJid, 'Maaf sedang tidak bisa menerima panggilan.\n\n-bot')
+        await aruga.sendText(callData.peerJid, 'Maaf, BOT tidak bisa menerima panggilan.\n\n*_- NCT Bot_*')
         .then(async () => {
             // bot akan memblock nomor itu
             await aruga.contactBlock(callData.peerJid)
